@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'icon_theme_data.dart';
-import 'theme.dart';
 
 /// Controls the default color, opacity, and size of icons in a widget subtree.
 ///
@@ -19,7 +18,7 @@ class IconTheme extends InheritedWidget {
   const IconTheme({
     Key key,
     @required this.data,
-    @required Widget child
+    @required Widget child,
   }) : assert(data != null),
        assert(child != null),
        super(key: key, child: child);
@@ -31,7 +30,7 @@ class IconTheme extends InheritedWidget {
   static Widget merge({
     Key key,
     @required IconThemeData data,
-    @required Widget child
+    @required Widget child,
   }) {
     return new Builder(
       builder: (BuildContext context) {
@@ -64,7 +63,7 @@ class IconTheme extends InheritedWidget {
 
   static IconThemeData _getInheritedIconThemeData(BuildContext context) {
     final IconTheme iconTheme = context.inheritFromWidgetOfExactType(IconTheme);
-    return iconTheme?.data ?? Theme.of(context).iconTheme;
+    return iconTheme?.data ?? const IconThemeData.fallback();
   }
 
   @override
